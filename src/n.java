@@ -10,7 +10,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -49,7 +48,7 @@ public class n extends Application {
     GraphicsContext gc = null;
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage){
 
         primaryStage.setTitle("Русские шашки");
 
@@ -67,7 +66,7 @@ public class n extends Application {
                 }
             }
         }
-        //1 - белые, 2 - черные
+
         gc = canvas.getGraphicsContext2D();
 
         EventHandler<MouseEvent> clickHandler = new EventHandler<MouseEvent>() {
@@ -231,7 +230,6 @@ public class n extends Application {
             }
         };
 
-        //canvas.addEventHandler(KeyEvent.KEY_PRESSED, keyHandler);
         canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, clickHandler);
         repaintBoard();
         Scene scene = new Scene(root,W,W);
@@ -267,7 +265,7 @@ public class n extends Application {
     public void repaintBoard() {
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, W, W);
-        gc.setFont(new Font("Arial", 18));
+        gc.setFont(new Font("Comic Sans MS", 18));
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
@@ -308,13 +306,13 @@ public class n extends Application {
         if (gameMSG.length()>0){
             Color msgColor = Color.color(1,0,0);
             gc.setFill(msgColor);
-            gc.setFont(new Font("Arial", 18.0));
+            gc.setFont(new Font("Comic Sans MS", 18.0));
             gc.fillText(gameMSG, 20, W-20);
             gameMSG = "";
         }
     }
 
-    public boolean canMove(int x, int y){
+    public boolean canMove(int x, int y){ //может ли фишка походить
         if (A[y][x] == 0) return false;
 
         if (A[y][x] == white){
@@ -361,7 +359,7 @@ public class n extends Application {
         return false;
     }
 
-    public boolean checkMove(int x, int y, int x2, int y2, int[] deadCell){
+    public boolean checkMove(int x, int y, int x2, int y2, int[] deadCell){ //может ли кто-то быть съеден, если да, передай его координаты
         if (A[y][x] == 0) return false;
         if ((x2 + y2)%2 != 0) return false;
         if (A[y2][x2]!= 0) return false;
@@ -372,7 +370,7 @@ public class n extends Application {
             if (y2==y-1) return false;
 
             if(y2==y+2 && x2==x-2 && (A[y+1][x-1] == black || A[y+1][x-1] == BK) && A[y2][x2] == 0){ //проверяем свободна ли клетка через одну слева сверху, является ли фигура рядом с выбранной вражеской пешкой или дамкой
-                deadCell[0] = x-1;
+                deadCell[0] = x-1; //если фигура оказалась врагом, присваиваем ее координаты
                 deadCell[1] = y+1;
                 return true;
             }
@@ -440,7 +438,7 @@ public class n extends Application {
             }
             if (wCnt > 0) return false; //если на пути встречаются пешки своего цвета
             if (bCnt <= 1) {
-                if (bCnt == 1) {
+                if (bCnt == 1) { //если на пути от нашей начальной позиции до желаемой находится только одна вражеская точка, мы можем ее съесть
                     deadCell[0] = firstBX;
                     deadCell[1] = firstBY;
                 }
@@ -560,7 +558,7 @@ public class n extends Application {
         return false;
     }
 
-    public boolean canEatSomeoneElse(int x, int y){
+    public boolean canEatSomeoneElse(int x, int y){ //может ли фишка съесть кого-то
         for (int i =0; i < N; i++){
             for (int j = 0; j < N; j++){
                 if (y==i && x==j) continue;
