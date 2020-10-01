@@ -27,7 +27,6 @@ class GameState {
     int totalBlack = 12;
     boolean gameOn = true;
     final int MOVE_LIMIT_WITHOUT_EAT = 15;
-    int totalMoves = 0;
     int movesFromLastEat = 0;
     boolean isSelected = false;
     int selectedX = 0;
@@ -364,7 +363,6 @@ class GameState {
                 if (isSelected && checkMove(selectedX, selectedY, horCor, N - 1 - verCor, deadCell)) {
                     if (canEat(selectedX, selectedY) && deadCell[0] == -1) {
                         gameMSG = "Нельзя ходить, если можно съесть";
-                        ;
                         return;
                     }
                     isSelected = false;
@@ -477,8 +475,7 @@ public class TheGame extends Application {
     Image lightKing = new Image(new FileInputStream("white_queen.png"));
     GameState X = new GameState();
 
-    public TheGame() throws FileNotFoundException {
-    }
+    public TheGame() throws FileNotFoundException { }
 
     public static void main(String[] args) {
         launch(args);
