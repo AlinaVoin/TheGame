@@ -10,12 +10,12 @@ class GameStateTest {
         assertEquals(gs.currentMove, 1);
 
         gs.move(0, 5);
-        assertEquals(gs.selectedX,0);
+        assertEquals(gs.selectedX, 0);
         assertEquals(gs.selectedY, 2);
 
         gs.move(1,4);
-        assertEquals(gs.totalWhite,12);
-        assertEquals(gs.totalBlack,12);
+        assertEquals(gs.totalWhite, 12);
+        assertEquals(gs.totalBlack, 12);
         assertEquals(gs.isSelected, false);
 
     }
@@ -84,7 +84,7 @@ class GameStateTest {
                 if (gs.canEat(i,j)) cnt++;
             }
         }
-        assertEquals(cnt,2);
+        assertEquals(cnt, 2);
     }
 
     @Test

@@ -466,7 +466,7 @@ class GameState {
     }
 }
 
-public class n extends Application {
+public class TheGame extends Application {
     final int W = 720;
     final int D = 72;
     Color light = Color.rgb(250, 206, 159);
@@ -477,7 +477,7 @@ public class n extends Application {
     Image lightKing = new Image(new FileInputStream("white_queen.png"));
     GameState X = new GameState();
 
-    public n() throws FileNotFoundException {
+    public TheGame() throws FileNotFoundException {
     }
 
     public static void main(String[] args) {
